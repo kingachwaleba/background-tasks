@@ -9,4 +9,5 @@
     <string name="file_size_value">0</string>
     <string name="file_type_value">0</string>
     <string name="downloaded_B_value">0</string>
+    <string name="enter_url_address_hint">Enter URL address</string>
 </resources>
