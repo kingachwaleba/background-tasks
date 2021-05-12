@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">BackgroundTasks</string>
+    <string name="url_address">URL address:</string>
+    <string name="file_size">File size:</string>
+    <string name="file_type">File type:</string>
+    <string name="downloaded_b">Downloaded B:</string>
+    <string name="download_file_button">download file</string>
+    <string name="get_info_button">get info</string>
+    <string name="file_size_value">0</string>
+    <string name="file_type_value">0</string>
+    <string name="downloaded_B_value">0</string>
 </resources>
