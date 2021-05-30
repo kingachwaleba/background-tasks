@@ -34,6 +34,11 @@ public class MainActivity extends AppCompatActivity {
 
         getInfoButton = findViewById(R.id.getInfoButton);
         downloadFileButton = findViewById(R.id.downloadFileButton);
+
+        getInfoButton.setOnClickListener(v -> {
+            TaskGetInfo taskGetInfo = new TaskGetInfo();
+            taskGetInfo.execute(urlAddress.getText().toString());
+        });
     }
 
     public class TaskGetInfo extends AsyncTask<String, Void, FileInfo> {
@@ -45,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             FileInfo fileInfo = null;
 
             try {
-                URL url = new URL(urlAddress.getText().toString());
+                URL url = new URL(strings[0]);
 
                 httpsURLConnection = (HttpsURLConnection) url.openConnection();
                 httpsURLConnection.setRequestMethod("GET");
