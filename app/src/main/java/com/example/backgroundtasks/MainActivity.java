@@ -8,6 +8,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.net.URL;
+
+import javax.net.ssl.HttpsURLConnection;
+
 public class MainActivity extends AppCompatActivity {
 
     private EditText urlAddress;
@@ -36,7 +40,28 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected FileInfo doInBackground(String... strings) {
-            return null;
+
+            HttpsURLConnection httpsURLConnection = null;
+            FileInfo fileInfo = null;
+
+            try {
+                URL url = new URL(urlAddress.getText().toString());
+
+                httpsURLConnection = (HttpsURLConnection) url.openConnection();
+                httpsURLConnection.setRequestMethod("GET");
+
+                fileInfo = new FileInfo();
+
+                fileInfo.setFileSize(httpsURLConnection.getContentLength());
+                fileInfo.setFileType(httpsURLConnection.getContentType());
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            } finally {
+                if (httpsURLConnection != null)
+                    httpsURLConnection.disconnect();
+            }
+
+            return fileInfo;
         }
 
         @Override
