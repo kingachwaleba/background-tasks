@@ -95,10 +95,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="@string/enter_url_address_hint"
         android:inputType="textPersonName"
         android:padding="10dp"
+        android:text="http://weii.pollub.pl/files/18/attachment/3455_strona,tytulowa,praca,inz.zip"
         android:textSize="20sp"
-        android:hint="@string/enter_url_address_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/URLaddress"
         app:layout_constraintTop_toTopOf="parent" />
