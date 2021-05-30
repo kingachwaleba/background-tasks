@@ -72,6 +72,11 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(FileInfo fileInfo) {
             super.onPostExecute(fileInfo);
+
+            if (fileInfo != null) {
+                fileSize.setText(fileInfo.getFileSize());
+                fileType.setText(fileInfo.getFileType());
+            }
         }
     }
 }
