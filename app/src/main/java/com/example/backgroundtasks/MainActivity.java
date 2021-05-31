@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.net.URL;
+import java.util.Locale;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -74,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
             super.onPostExecute(fileInfo);
 
             if (fileInfo != null) {
-                fileSize.setText(fileInfo.getFileSize());
+                fileSize.setText(String.format(Locale.getDefault(), "%d", fileInfo.getFileSize()));
                 fileType.setText(fileInfo.getFileType());
             }
         }
