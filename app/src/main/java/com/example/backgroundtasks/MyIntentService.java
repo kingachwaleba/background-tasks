@@ -14,8 +14,8 @@ public class MyIntentService extends IntentService {
     private static final int NOTIFICATION_ID = 1;
     private NotificationManager notificationManager;
 
-    public MyIntentService(String name) {
-        super(name);
+    public MyIntentService() {
+        super("MyIntentService");
     }
 
     private static void runService(Context context, int parameter) {
