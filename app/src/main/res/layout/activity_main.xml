@@ -98,7 +98,7 @@
         android:hint="@string/enter_url_address_hint"
         android:inputType="textPersonName"
         android:padding="10dp"
-        android:text="http://weii.pollub.pl/files/18/attachment/3455_strona,tytulowa,praca,inz.zip"
+        android:text="https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.4.36.tar.xz"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/URLaddress"
