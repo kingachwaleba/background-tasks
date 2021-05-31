@@ -2,6 +2,7 @@ package com.example.backgroundtasks;
 
 import android.app.IntentService;
 import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 
 import androidx.annotation.Nullable;
@@ -15,6 +16,15 @@ public class MyIntentService extends IntentService {
 
     public MyIntentService(String name) {
         super(name);
+    }
+
+    private static void runService(Context context, int parameter) {
+        Intent intent = new Intent(context, MyIntentService.class);
+
+        intent.setAction(ACTION_EXERCISE1);
+        intent.putExtra(PARAMETER1, parameter);
+
+        context.startService(intent);
     }
 
     @Override
