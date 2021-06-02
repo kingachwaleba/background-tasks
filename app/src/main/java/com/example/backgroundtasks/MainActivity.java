@@ -1,9 +1,16 @@
 package com.example.backgroundtasks;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -21,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView downloadedB;
     private Button getInfoButton;
     private Button downloadFileButton;
+
+    private final int WRITE_EXTERNAL_STORAGE_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +49,42 @@ public class MainActivity extends AppCompatActivity {
             TaskGetInfo taskGetInfo = new TaskGetInfo();
             taskGetInfo.execute(urlAddress.getText().toString());
         });
+
+        downloadFileButton.setOnClickListener(v -> {
+            if (ActivityCompat.checkSelfPermission(
+                    this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                MyIntentService.runService(MainActivity.this, urlAddress.getText().toString());
+            }
+            else {
+//                if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+//                        Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+//
+//                }
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_EXTERNAL_STORAGE_CODE);
+            }
+        });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch (requestCode) {
+            case WRITE_EXTERNAL_STORAGE_CODE:
+                if (permissions.length > 0 && permissions[0].equals(Manifest.permission.WRITE_EXTERNAL_STORAGE) && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    MyIntentService.runService(MainActivity.this, urlAddress.getText().toString());
+                }
+//                else {
+//
+//                }
+                break;
+//            default:
+//
+//                break;
+        }
     }
 
     public class TaskGetInfo extends AsyncTask<String, Void, FileInfo> {
