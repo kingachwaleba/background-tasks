@@ -69,12 +69,13 @@ public class MyIntentService extends IntentService {
             byte[] buffer = new byte[BLOCK_SIZE];
 
             int downloaded = dataInputStream.read(buffer, 0, BLOCK_SIZE);
-
+            int totalDownloaded = downloaded;
             while (downloaded != -1) {
                 fileOutputStream.write(buffer, 0, downloaded);
 
                 downloaded = dataInputStream.read(buffer, 0, BLOCK_SIZE);
-                Log.d("Downloading file:" + outFile.getName(), "");
+                totalDownloaded += downloaded;
+                Log.d("Downloading file:" + outFile.getName(), Integer.toString(totalDownloaded));
             }
         } catch (Exception exception) {
             exception.printStackTrace();
