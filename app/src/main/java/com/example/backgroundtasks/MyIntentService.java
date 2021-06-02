@@ -35,7 +35,7 @@ public class MyIntentService extends IntentService {
         super("MyIntentService");
     }
 
-    private static void runService(Context context, int parameter) {
+    private static void runService(Context context, String parameter) {
         Intent intent = new Intent(context, MyIntentService.class);
 
         intent.setAction(ACTION_EXERCISE1);
