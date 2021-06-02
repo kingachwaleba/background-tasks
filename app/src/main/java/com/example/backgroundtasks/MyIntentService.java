@@ -35,7 +35,7 @@ public class MyIntentService extends IntentService {
         super("MyIntentService");
     }
 
-    private static void runService(Context context, String parameter) {
+    public static void runService(Context context, String parameter) {
         Intent intent = new Intent(context, MyIntentService.class);
 
         intent.setAction(ACTION_EXERCISE1);
@@ -44,7 +44,7 @@ public class MyIntentService extends IntentService {
         context.startService(intent);
     }
 
-    private void downloadFile(String stringUrl) {
+    public void downloadFile(String stringUrl) {
         FileOutputStream fileOutputStream = null;
         HttpsURLConnection httpsURLConnection = null;
         InputStream inputStream = null;
@@ -100,7 +100,7 @@ public class MyIntentService extends IntentService {
         }
     }
 
-    private void prepareNotificationChannel() {
+    public void prepareNotificationChannel() {
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
         CharSequence name = getString(R.string.app_name);
@@ -111,7 +111,7 @@ public class MyIntentService extends IntentService {
         notificationManager.createNotificationChannel(notificationChannel);
     }
 
-    private Notification createNotification() {
+    public Notification createNotification() {
         Intent notificationIntent = new Intent(this, MainActivity.class);
 
         // notificationIntent.putExtra();
