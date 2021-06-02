@@ -145,6 +145,23 @@ public class MyIntentService extends IntentService {
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
+        notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        prepareNotificationChannel();
+        startForeground(NOTIFICATION_ID, createNotification());
 
+        if (intent != null) {
+            final String action = intent.getAction();
+
+            if (ACTION_EXERCISE1.equals(action)) {
+                final String url = intent.getStringExtra(PARAMETER1);
+
+                downloadFile(url);
+            }
+            else {
+                Log.e("intent_service", "unknown action");
+            }
+        }
+
+        Log.e("intent_service", "service did a task");
     }
 }
