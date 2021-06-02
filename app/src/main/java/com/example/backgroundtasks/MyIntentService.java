@@ -1,9 +1,14 @@
 package com.example.backgroundtasks;
 
 import android.app.IntentService;
+import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
 
@@ -22,6 +27,7 @@ public class MyIntentService extends IntentService {
 
     private static final String ACTION_EXERCISE1 = "com.example.intent_service.action.exercise1";
     private static final String PARAMETER1 = "com.example.intent_service.extra.parameter1";
+    private static final String CHANNEL_ID = "com.example.intent_service.extra.channel_id";
     private static final int NOTIFICATION_ID = 1;
     private NotificationManager notificationManager;
 
@@ -66,7 +72,7 @@ public class MyIntentService extends IntentService {
 
             while (downloaded != -1) {
                 fileOutputStream.write(buffer, 0, downloaded);
-                
+
                 downloaded = dataInputStream.read(buffer, 0, BLOCK_SIZE);
                 Log.d("Downloading file:" + outFile.getName(), "");
             }
@@ -92,6 +98,49 @@ public class MyIntentService extends IntentService {
             if (httpsURLConnection != null)
                 httpsURLConnection.disconnect();
         }
+    }
+
+    private void prepareNotificationChannel() {
+        notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+        CharSequence name = getString(R.string.app_name);
+
+        NotificationChannel notificationChannel =
+                new NotificationChannel(CHANNEL_ID, name, NotificationManager.IMPORTANCE_LOW);
+
+        notificationManager.createNotificationChannel(notificationChannel);
+    }
+
+    private Notification createNotification() {
+        Intent notificationIntent = new Intent(this, MainActivity.class);
+
+        // notificationIntent.putExtra();
+
+        TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(this);
+        taskStackBuilder.addParentStack(MainActivity.class);
+        taskStackBuilder.addNextIntent(notificationIntent);
+
+        PendingIntent pendingIntent =
+                taskStackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        Notification.Builder notificationBuilder = new Notification.Builder(this);
+        notificationBuilder.setContentTitle(getString(R.string.app_name))
+                .setProgress(100, 10, false)
+                .setContentIntent(pendingIntent)
+                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setWhen(System.currentTimeMillis())
+                .setPriority(Notification.PRIORITY_HIGH);
+
+//        if () {
+//            notificationBuilder.setOngoing(false);
+//        }
+//        else {
+//            notificationBuilder.setOngoing(true);
+//        }
+
+        notificationBuilder.setChannelId(CHANNEL_ID);
+
+        return notificationBuilder.build();
     }
 
     @Override
