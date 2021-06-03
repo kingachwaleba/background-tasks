@@ -134,7 +134,7 @@ public class MyIntentService extends IntentService {
         notificationBuilder.setContentTitle(getString(R.string.content_title))
                 .setProgress(100, 10, false)
                 .setContentIntent(pendingIntent)
-                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setSmallIcon(R.drawable.ic_launcher_2_foreground)
                 .setWhen(System.currentTimeMillis())
                 .setPriority(Notification.PRIORITY_HIGH);
 
