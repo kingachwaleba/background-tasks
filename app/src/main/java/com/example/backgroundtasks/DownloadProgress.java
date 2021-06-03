@@ -16,6 +16,9 @@ public class DownloadProgress implements Parcelable {
     }
 
     public DownloadProgress(Parcel in) {
+        downloadedBytes = in.readInt();
+        size = in.readInt();
+        status = in.readInt();
     }
 
     public static final Creator<DownloadProgress> CREATOR = new Creator<DownloadProgress>() {
