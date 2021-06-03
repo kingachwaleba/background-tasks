@@ -9,6 +9,10 @@ public class DownloadProgress implements Parcelable {
     private int size;
     private int status;
 
+    private static final int STATUS_ERROR = -1;
+    private static final int STATUS_IN_PROGRESS = 0;
+    private static final int STATUS_FINISHED = 1;
+
     public DownloadProgress() {
         downloadedBytes = 0;
         size = 0;
