@@ -40,5 +40,8 @@ public class DownloadProgress implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(downloadedBytes);
+        dest.writeInt(size);
+        dest.writeInt(status);
     }
 }
