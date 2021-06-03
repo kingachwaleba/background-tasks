@@ -131,7 +131,7 @@ public class MyIntentService extends IntentService {
 
         // Build the notification
         Notification.Builder notificationBuilder = new Notification.Builder(this, CHANNEL_ID);
-        notificationBuilder.setContentTitle(getString(R.string.app_name))
+        notificationBuilder.setContentTitle("Downloading file")
                 .setProgress(100, 10, false)
                 .setContentIntent(pendingIntent)
                 .setSmallIcon(R.drawable.ic_launcher_background)
