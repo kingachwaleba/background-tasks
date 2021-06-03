@@ -30,6 +30,7 @@ public class MyIntentService extends IntentService {
     private static final String CHANNEL_ID = "com.example.intent_service.extra.channel_id";
     private static final int NOTIFICATION_ID = 1;
     private NotificationManager notificationManager;
+    private Boolean idDownloaded = false;
 
     public MyIntentService() {
         super("MyIntentService");
@@ -77,6 +78,9 @@ public class MyIntentService extends IntentService {
                 totalDownloaded += downloaded;
                 Log.d("Downloading file:" + outFile.getName(), Integer.toString(totalDownloaded));
             }
+
+            idDownloaded = true;
+
         } catch (Exception exception) {
             exception.printStackTrace();
         } finally {
@@ -135,12 +139,7 @@ public class MyIntentService extends IntentService {
                 .setPriority(Notification.PRIORITY_HIGH);
 
         // If downloading still lasts
-//        if () {
-//            notificationBuilder.setOngoing(false);
-//        }
-//        else {
-//            notificationBuilder.setOngoing(true);
-//        }
+        notificationBuilder.setOngoing(idDownloaded);
 
         // Set the notification channel for the created notification
         notificationBuilder.setChannelId(CHANNEL_ID);
