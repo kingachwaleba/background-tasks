@@ -117,6 +117,7 @@ public class MyIntentService extends IntentService {
 
         // notificationIntent.putExtra();
 
+        // Build the stack with notifications, which a user expects after return
         TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(this);
         taskStackBuilder.addParentStack(MainActivity.class);
         taskStackBuilder.addNextIntent(notificationIntent);
@@ -124,6 +125,7 @@ public class MyIntentService extends IntentService {
         PendingIntent pendingIntent =
                 taskStackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
+        // Build the notification
         Notification.Builder notificationBuilder = new Notification.Builder(this, CHANNEL_ID);
         notificationBuilder.setContentTitle(getString(R.string.app_name))
                 .setProgress(100, 10, false)
@@ -132,6 +134,7 @@ public class MyIntentService extends IntentService {
                 .setWhen(System.currentTimeMillis())
                 .setPriority(Notification.PRIORITY_HIGH);
 
+        // If downloading still lasts
 //        if () {
 //            notificationBuilder.setOngoing(false);
 //        }
@@ -139,8 +142,10 @@ public class MyIntentService extends IntentService {
 //            notificationBuilder.setOngoing(true);
 //        }
 
+        // Set the notification channel for the created notification
         notificationBuilder.setChannelId(CHANNEL_ID);
 
+        // Create and return the notification
         return notificationBuilder.build();
     }
 
