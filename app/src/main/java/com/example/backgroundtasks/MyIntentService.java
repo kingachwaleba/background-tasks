@@ -124,7 +124,7 @@ public class MyIntentService extends IntentService {
         PendingIntent pendingIntent =
                 taskStackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        Notification.Builder notificationBuilder = new Notification.Builder(this);
+        Notification.Builder notificationBuilder = new Notification.Builder(this, CHANNEL_ID);
         notificationBuilder.setContentTitle(getString(R.string.app_name))
                 .setProgress(100, 10, false)
                 .setContentIntent(pendingIntent)
