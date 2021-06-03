@@ -11,4 +11,5 @@
     <string name="downloaded_B_value">0</string>
     <string name="enter_url_address_hint">Enter URL address</string>
     <string name="example_url_address">https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.4.36.tar.xz</string>
+    <string name="content_title">Downloading file</string>
 </resources>
