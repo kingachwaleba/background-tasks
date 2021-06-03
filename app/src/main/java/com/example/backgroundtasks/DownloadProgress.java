@@ -4,6 +4,11 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class DownloadProgress implements Parcelable {
+
+    private int downloadedBytes;
+    private int size;
+    private int status;
+
     public DownloadProgress(Parcel in) {
     }
 
