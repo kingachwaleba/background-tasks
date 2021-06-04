@@ -10,6 +10,6 @@
     <string name="file_type_value">0</string>
     <string name="downloaded_B_value">0</string>
     <string name="enter_url_address_hint">Enter URL address</string>
-    <string name="example_url_address">https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.4.36.tar.xz</string>
+    <string name="example_url_address">https://www.eurofound.europa.eu/sites/default/files/ef_publication/field_ef_document/ef1710en.pdf</string>
     <string name="content_title">Downloading file</string>
 </resources>
