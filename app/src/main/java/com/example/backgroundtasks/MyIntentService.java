@@ -160,7 +160,7 @@ public class MyIntentService extends IntentService {
                 .setPriority(Notification.PRIORITY_HIGH);
 
         // If downloading still lasts
-        notificationBuilder.setOngoing(ifDownloaded);
+        notificationBuilder.setOngoing(!ifDownloaded);
 
         // Set the notification channel for the created notification
         notificationBuilder.setChannelId(CHANNEL_ID);
