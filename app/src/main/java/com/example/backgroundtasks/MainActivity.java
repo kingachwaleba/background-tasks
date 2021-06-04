@@ -58,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
                 progressBar.setProgress(totalSize);
                 Toast.makeText(getApplicationContext(), "Download finished!", Toast.LENGTH_SHORT).show();
             }
+            else {
+                Toast.makeText(getApplicationContext(), "Error!", Toast.LENGTH_SHORT).show();
+            }
         }
     };
 
