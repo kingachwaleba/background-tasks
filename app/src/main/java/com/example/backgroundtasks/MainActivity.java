@@ -39,7 +39,12 @@ public class MainActivity extends AppCompatActivity {
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            Bundle bundle = intent.getExtras();
+            DownloadProgress downloadProgress = bundle.getParcelable(MyIntentService.INFO);
 
+            if (downloadProgress.getStatus() == DownloadProgress.STATUS_IN_PROGRESS) {
+                downloadedB.setText(String.format(Locale.getDefault(), "%d", downloadProgress.getDownloadedBytes()));
+            }
         }
     };
 
