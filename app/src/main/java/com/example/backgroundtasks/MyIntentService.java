@@ -86,11 +86,11 @@ public class MyIntentService extends IntentService {
                 totalDownloaded += downloaded;
                 downloadProgress.setDownloadedBytes(totalDownloaded);
                 sendBroadcast(downloadProgress);
-                notificationManager.notify(NOTIFICATION_ID, createNotification(downloadProgress.getSize(), downloadProgress.getDownloadedBytes(), "Downloading file"));
+                notificationManager.notify(NOTIFICATION_ID, createNotification(downloadProgress.getSize(), downloadProgress.getDownloadedBytes(), "Download file"));
 
                 downloaded = dataInputStream.read(buffer, 0, BLOCK_SIZE);
 
-                Log.d("Downloading file:" + outFile.getName(), totalDownloaded + " bytes.");
+                Log.d("Download file:" + outFile.getName(), totalDownloaded + " bytes.");
             }
 
             downloadProgress.setStatus(DownloadProgress.STATUS_FINISHED);
@@ -159,7 +159,7 @@ public class MyIntentService extends IntentService {
                 .setWhen(System.currentTimeMillis())
                 .setPriority(Notification.PRIORITY_HIGH);
 
-        // If downloading still lasts
+        // If download still lasts
         notificationBuilder.setOngoing(!ifDownloaded);
 
         // Set the notification channel for the created notification
@@ -181,7 +181,7 @@ public class MyIntentService extends IntentService {
     protected void onHandleIntent(@Nullable Intent intent) {
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         prepareNotificationChannel();
-        startForeground(NOTIFICATION_ID, createNotification(100, 0, "Downloading file"));
+        startForeground(NOTIFICATION_ID, createNotification(100, 0, "Download file"));
 
         if (intent != null) {
             final String action = intent.getAction();
