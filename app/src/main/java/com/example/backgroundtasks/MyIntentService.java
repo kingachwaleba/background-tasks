@@ -73,7 +73,7 @@ public class MyIntentService extends IntentService {
             byte[] buffer = new byte[BLOCK_SIZE];
 
             int downloaded = dataInputStream.read(buffer, 0, BLOCK_SIZE);
-            int totalDownloaded = downloaded;
+            int totalDownloaded = 0;
             while (downloaded != -1) {
                 fileOutputStream.write(buffer, 0, downloaded);
 
