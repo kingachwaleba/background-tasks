@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             else if (downloadProgress.getStatus() == DownloadProgress.STATUS_FINISHED) {
                 downloadedB.setText(String.format(Locale.getDefault(), "%d", downloadedBytes));
                 progressBar.setProgress(totalSize);
-                Toast.makeText(getApplicationContext(), "Download finished!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Download completed!", Toast.LENGTH_SHORT).show();
                 downloadedB.setText(String.format(Locale.getDefault(), "%s", "completed"));
             }
             else {
