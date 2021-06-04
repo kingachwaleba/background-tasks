@@ -74,12 +74,27 @@ public class MyIntentService extends IntentService {
 
             int downloaded = dataInputStream.read(buffer, 0, BLOCK_SIZE);
             int totalDownloaded = 0;
+
+            DownloadProgress downloadProgress = new DownloadProgress();
+            downloadProgress.setSize(httpsURLConnection.getContentLength());
+            downloadProgress.setDownloadedBytes(totalDownloaded);
+            downloadProgress.setStatus(DownloadProgress.STATUS_IN_PROGRESS);
+            sendBroadcast(downloadProgress);
+
             while (downloaded != -1) {
                 fileOutputStream.write(buffer, 0, downloaded);
+
                 totalDownloaded += downloaded;
+                downloadProgress.setDownloadedBytes(totalDownloaded);
+                sendBroadcast(downloadProgress);
+
                 downloaded = dataInputStream.read(buffer, 0, BLOCK_SIZE);
+
                 Log.d("Downloading file:" + outFile.getName(), Integer.toString(totalDownloaded));
             }
+
+            downloadProgress.setStatus(DownloadProgress.STATUS_FINISHED);
+            sendBroadcast(downloadProgress);
 
             ifDownloaded = true;
 
