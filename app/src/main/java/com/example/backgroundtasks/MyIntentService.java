@@ -33,6 +33,7 @@ public class MyIntentService extends IntentService {
     public static final int NOTIFICATION_ID = 1;
     private NotificationManager notificationManager;
     private Boolean ifDownloaded = false;
+    private DownloadProgress downloadProgress = new DownloadProgress();
 
     public MyIntentService() {
         super("MyIntentService");
@@ -74,7 +75,6 @@ public class MyIntentService extends IntentService {
             int downloaded = dataInputStream.read(buffer, 0, BLOCK_SIZE);
             int totalDownloaded = 0;
 
-            DownloadProgress downloadProgress = new DownloadProgress();
             downloadProgress.setSize(httpsURLConnection.getContentLength());
             downloadProgress.setDownloadedBytes(totalDownloaded);
             downloadProgress.setStatus(DownloadProgress.STATUS_IN_PROGRESS);
@@ -100,6 +100,9 @@ public class MyIntentService extends IntentService {
             ifDownloaded = true;
 
         } catch (Exception exception) {
+            downloadProgress.setStatus(DownloadProgress.STATUS_ERROR);
+            sendBroadcast(downloadProgress);
+            
             exception.printStackTrace();
         } finally {
             if (inputStream != null) {
