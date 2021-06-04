@@ -86,6 +86,7 @@ public class MyIntentService extends IntentService {
                 totalDownloaded += downloaded;
                 downloadProgress.setDownloadedBytes(totalDownloaded);
                 sendBroadcast(downloadProgress);
+                notificationManager.notify(NOTIFICATION_ID, createNotification(downloadProgress.getSize(), downloadProgress.getDownloadedBytes(), "Downloading file"));
 
                 downloaded = dataInputStream.read(buffer, 0, BLOCK_SIZE);
 
@@ -94,6 +95,7 @@ public class MyIntentService extends IntentService {
 
             downloadProgress.setStatus(DownloadProgress.STATUS_FINISHED);
             sendBroadcast(downloadProgress);
+            notificationManager.notify(NOTIFICATION_ID, createNotification(downloadProgress.getSize(), downloadProgress.getDownloadedBytes(), "Download finished"));
 
             Log.d("Downloaded file:" + outFile.getName(), totalDownloaded + " bytes.");
 
@@ -102,7 +104,7 @@ public class MyIntentService extends IntentService {
         } catch (Exception exception) {
             downloadProgress.setStatus(DownloadProgress.STATUS_ERROR);
             sendBroadcast(downloadProgress);
-            
+
             exception.printStackTrace();
         } finally {
             if (inputStream != null) {
@@ -137,7 +139,7 @@ public class MyIntentService extends IntentService {
         notificationManager.createNotificationChannel(notificationChannel);
     }
 
-    public Notification createNotification() {
+    public Notification createNotification(int max, int progress, String text) {
         Intent notificationIntent = new Intent(this, MainActivity.class);
 
         // notificationIntent.putExtra();
@@ -152,8 +154,8 @@ public class MyIntentService extends IntentService {
 
         // Build the notification
         Notification.Builder notificationBuilder = new Notification.Builder(this, CHANNEL_ID);
-        notificationBuilder.setContentTitle(getString(R.string.content_title))
-                .setProgress(100, 10, false)
+        notificationBuilder.setContentTitle(text)
+                .setProgress(max, progress, false)
                 .setContentIntent(pendingIntent)
                 .setSmallIcon(R.drawable.ic_launcher_2_foreground)
                 .setWhen(System.currentTimeMillis())
@@ -181,7 +183,7 @@ public class MyIntentService extends IntentService {
     protected void onHandleIntent(@Nullable Intent intent) {
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         prepareNotificationChannel();
-        startForeground(NOTIFICATION_ID, createNotification());
+        startForeground(NOTIFICATION_ID, createNotification(100, 0, "Downloading file"));
 
         if (intent != null) {
             final String action = intent.getAction();
