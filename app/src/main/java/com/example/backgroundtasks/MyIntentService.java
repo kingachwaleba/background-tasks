@@ -90,13 +90,13 @@ public class MyIntentService extends IntentService {
 
                 downloaded = dataInputStream.read(buffer, 0, BLOCK_SIZE);
 
-                Log.d("Downloading file:" + outFile.getName(), Integer.toString(totalDownloaded) + " bytes.");
+                Log.d("Downloading file:" + outFile.getName(), totalDownloaded + " bytes.");
             }
 
             downloadProgress.setStatus(DownloadProgress.STATUS_FINISHED);
             sendBroadcast(downloadProgress);
 
-            Log.d("Downloaded file:" + outFile.getName(), Integer.toString(totalDownloaded) + " bytes.");
+            Log.d("Downloaded file:" + outFile.getName(), totalDownloaded + " bytes.");
 
             ifDownloaded = true;
 
