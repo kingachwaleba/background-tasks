@@ -95,7 +95,6 @@ public class MyIntentService extends IntentService {
 
             downloadProgress.setStatus(DownloadProgress.STATUS_FINISHED);
             sendBroadcast(downloadProgress);
-            notificationManager.notify(NOTIFICATION_ID, createNotification(downloadProgress.getSize(), downloadProgress.getDownloadedBytes(), "Download finished"));
 
             Log.d("Downloaded file:" + outFile.getName(), totalDownloaded + " bytes.");
 
@@ -195,6 +194,10 @@ public class MyIntentService extends IntentService {
                 Log.e("intent_service", "unknown action");
             }
         }
+
+        // Make it again a normal service
+        stopForeground(true);
+        notificationManager.notify(NOTIFICATION_ID, createNotification(0,0, "Download completed"));
 
         Log.e("intent_service", "service did a task");
     }
