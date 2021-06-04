@@ -13,6 +13,7 @@ import android.os.Environment;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.io.DataInputStream;
 import java.io.File;
@@ -148,6 +149,14 @@ public class MyIntentService extends IntentService {
 
         // Create and return the notification
         return notificationBuilder.build();
+    }
+
+    public void sendBroadcast(DownloadProgress downloadProgress) {
+        Intent intent = new Intent(RECEIVER);
+        intent.putExtra(INFO, downloadProgress);
+
+        // Send a message
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
     @Override
