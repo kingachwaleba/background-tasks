@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.net.URL;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView downloadedB;
     private Button getInfoButton;
     private Button downloadFileButton;
+    private ProgressBar progressBar;
 
     private final int WRITE_EXTERNAL_STORAGE_CODE = 1;
 
@@ -77,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
 
         getInfoButton = findViewById(R.id.getInfoButton);
         downloadFileButton = findViewById(R.id.downloadFileButton);
+
+        progressBar = findViewById(R.id.progressBar);
 
         getInfoButton.setOnClickListener(v -> {
             TaskGetInfo taskGetInfo = new TaskGetInfo();
