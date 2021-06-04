@@ -9,9 +9,9 @@ public class DownloadProgress implements Parcelable {
     private int size;
     private int status;
 
-    private static final int STATUS_ERROR = -1;
-    private static final int STATUS_IN_PROGRESS = 0;
-    private static final int STATUS_FINISHED = 1;
+    public static final int STATUS_ERROR = -1;
+    public static final int STATUS_IN_PROGRESS = 0;
+    public static final int STATUS_FINISHED = 1;
 
     public DownloadProgress() {
         downloadedBytes = 0;
@@ -47,5 +47,29 @@ public class DownloadProgress implements Parcelable {
         dest.writeInt(downloadedBytes);
         dest.writeInt(size);
         dest.writeInt(status);
+    }
+
+    public int getDownloadedBytes() {
+        return downloadedBytes;
+    }
+
+    public void setDownloadedBytes(int downloadedBytes) {
+        this.downloadedBytes = downloadedBytes;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }
