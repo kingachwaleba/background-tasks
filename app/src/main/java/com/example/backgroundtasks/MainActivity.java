@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 downloadedB.setText(String.format(Locale.getDefault(), "%d", downloadedBytes));
                 progressBar.setProgress(totalSize);
                 Toast.makeText(getApplicationContext(), "Download finished!", Toast.LENGTH_SHORT).show();
+                downloadedB.setText(String.format(Locale.getDefault(), "%s", "completed"));
             }
             else {
                 Toast.makeText(getApplicationContext(), "Error!", Toast.LENGTH_SHORT).show();
