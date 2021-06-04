@@ -54,6 +54,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+
+        // Unregister a broadcast receiver
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver);
     }
 
     @Override
