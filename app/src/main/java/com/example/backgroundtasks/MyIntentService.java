@@ -25,12 +25,12 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class MyIntentService extends IntentService {
 
-    private static final String ACTION_EXERCISE1 = "com.example.intent_service.action.exercise1";
-    private static final String PARAMETER1 = "com.example.intent_service.extra.parameter1";
-    private static final String CHANNEL_ID = "com.example.intent_service.extra.channel_id";
-    private static final String RECEIVER = "com.example.intent_service.extra.receiver";
-    private static final String INFO = "info";
-    private static final int NOTIFICATION_ID = 1;
+    public static final String ACTION_EXERCISE1 = "com.example.intent_service.action.exercise1";
+    public static final String PARAMETER1 = "com.example.intent_service.extra.parameter1";
+    public static final String CHANNEL_ID = "com.example.intent_service.extra.channel_id";
+    public static final String RECEIVER = "com.example.intent_service.extra.receiver";
+    public static final String INFO = "info";
+    public static final int NOTIFICATION_ID = 1;
     private NotificationManager notificationManager;
     private Boolean ifDownloaded = false;
 
