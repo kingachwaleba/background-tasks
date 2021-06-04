@@ -96,6 +96,8 @@ public class MyIntentService extends IntentService {
             downloadProgress.setStatus(DownloadProgress.STATUS_FINISHED);
             sendBroadcast(downloadProgress);
 
+            Log.d("Downloaded file:" + outFile.getName(), Integer.toString(totalDownloaded) + " bytes.");
+
             ifDownloaded = true;
 
         } catch (Exception exception) {
