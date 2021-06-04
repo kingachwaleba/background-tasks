@@ -141,9 +141,7 @@ public class MyIntentService extends IntentService {
 
     public Notification createNotification(int max, int progress, String text) {
         Intent notificationIntent = new Intent(this, MainActivity.class);
-
-        // notificationIntent.putExtra();
-
+        
         // Build the stack with notifications, which a user expects after return
         TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(this);
         taskStackBuilder.addParentStack(MainActivity.class);
