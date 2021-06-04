@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.net.URL;
 import java.util.Locale;
@@ -44,8 +45,18 @@ public class MainActivity extends AppCompatActivity {
             Bundle bundle = intent.getExtras();
             DownloadProgress downloadProgress = bundle.getParcelable(MyIntentService.INFO);
 
+            int downloadedBytes = downloadProgress.getDownloadedBytes();
+            int totalSize = downloadProgress.getSize();
+            progressBar.setMax(totalSize);
+
             if (downloadProgress.getStatus() == DownloadProgress.STATUS_IN_PROGRESS) {
-                downloadedB.setText(String.format(Locale.getDefault(), "%d", downloadProgress.getDownloadedBytes()));
+                downloadedB.setText(String.format(Locale.getDefault(), "%d", downloadedBytes));
+                progressBar.setProgress(downloadedBytes);
+            }
+            else if (downloadProgress.getStatus() == DownloadProgress.STATUS_FINISHED) {
+                downloadedB.setText(String.format(Locale.getDefault(), "%d", downloadedBytes));
+                progressBar.setProgress(totalSize);
+                Toast.makeText(getApplicationContext(), "Download finished!", Toast.LENGTH_SHORT).show();
             }
         }
     };
