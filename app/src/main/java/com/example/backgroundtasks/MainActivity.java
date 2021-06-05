@@ -140,9 +140,9 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
                 // Unknown requestCode
-//            default:
-//
-//                break;
+            default:
+                Log.e("intent_service", "Unknown requestCode");
+                break;
         }
     }
 
