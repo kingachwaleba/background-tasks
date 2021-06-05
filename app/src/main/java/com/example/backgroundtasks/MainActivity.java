@@ -128,21 +128,18 @@ public class MainActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        switch (requestCode) {
-            case WRITE_EXTERNAL_STORAGE_CODE:
-                // There is permission so download can start
-                if (permissions.length > 0 && permissions[0].equals(Manifest.permission.WRITE_EXTERNAL_STORAGE) && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    MyIntentService.runService(MainActivity.this, urlAddress.getText().toString());
-                }
-                // There is no permission
-                else {
-                    Toast.makeText(getApplicationContext(), "You cannot download file without permission!", Toast.LENGTH_SHORT).show();
-                }
-                break;
-                // Unknown requestCode
-            default:
-                Log.e("intent_service", "Unknown requestCode");
-                break;
+        // There is permission so download can start
+        if (requestCode == WRITE_EXTERNAL_STORAGE_CODE) {
+            if (permissions.length > 0 && permissions[0].equals(Manifest.permission.WRITE_EXTERNAL_STORAGE) && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                MyIntentService.runService(MainActivity.this, urlAddress.getText().toString());
+            }
+            // There is no permission
+            else {
+                Toast.makeText(getApplicationContext(), "You cannot download file without permission!", Toast.LENGTH_SHORT).show();
+            }
+            // Unknown requestCode
+        } else {
+            Log.e("intent_service", "Unknown requestCode");
         }
     }
 
