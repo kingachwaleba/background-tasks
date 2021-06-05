@@ -135,8 +135,9 @@ public class MainActivity extends AppCompatActivity {
             else {
                 Toast.makeText(getApplicationContext(), "You cannot download file without permission!", Toast.LENGTH_SHORT).show();
             }
-            // Unknown requestCode
-        } else {
+        }
+        // Unknown requestCode
+        else {
             Log.e("intent_service", "Unknown requestCode");
         }
     }
