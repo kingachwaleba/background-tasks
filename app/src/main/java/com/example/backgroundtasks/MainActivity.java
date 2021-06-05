@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
     private final int WRITE_EXTERNAL_STORAGE_CODE = 1;
 
-    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             Bundle bundle = intent.getExtras();
