@@ -12,4 +12,13 @@
     <string name="enter_url_address_hint">Enter URL address</string>
     <string name="example_url_address">https://www.eurofound.europa.eu/sites/default/files/ef_publication/field_ef_document/ef1710en.pdf</string>
     <string name="content_title">Downloading file</string>
+    <string name="incorrect_url_address">Incorrect URL address!</string>
+    <string name="error">Error!</string>
+    <string name="no_permission_message">There is no permission to download file</string>
+    <string name="no_permission_message_2">You cannot download file without permission!</string>
+    <string name="unknown_reguest_code">Unknown requestCode</string>
+    <string name="download_completed">Download completed!</string>
+    <string name="download_file">Download file</string>
+    <string name="did_task">service did a task</string>
+    <string name="unknown_action">unknown action</string>
 </resources>

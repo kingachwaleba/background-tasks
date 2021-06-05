@@ -86,7 +86,7 @@ public class MyIntentService extends IntentService {
                 totalDownloaded += downloaded;
                 downloadProgress.setDownloadedBytes(totalDownloaded);
                 sendBroadcast(downloadProgress);
-                notificationManager.notify(NOTIFICATION_ID, createNotification(downloadProgress.getSize(), downloadProgress.getDownloadedBytes(), "Download file"));
+                notificationManager.notify(NOTIFICATION_ID, createNotification(downloadProgress.getSize(), downloadProgress.getDownloadedBytes(), getString(R.string.download_file)));
 
                 downloaded = dataInputStream.read(buffer, 0, BLOCK_SIZE);
 
@@ -180,7 +180,7 @@ public class MyIntentService extends IntentService {
     protected void onHandleIntent(@Nullable Intent intent) {
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         prepareNotificationChannel();
-        startForeground(NOTIFICATION_ID, createNotification(100, 0, "Download file"));
+        startForeground(NOTIFICATION_ID, createNotification(100, 0, getString(R.string.download_file)));
 
         if (intent != null) {
             final String action = intent.getAction();
@@ -191,14 +191,14 @@ public class MyIntentService extends IntentService {
                 downloadFile(url);
             }
             else {
-                Log.e("intent_service", "unknown action");
+                Log.e("intent_service", getString(R.string.unknown_action));
             }
         }
 
         // Make it again a normal service
         stopForeground(true);
-        notificationManager.notify(NOTIFICATION_ID, createNotification(0,0, "Download completed"));
+        notificationManager.notify(NOTIFICATION_ID, createNotification(0,0, getString(R.string.download_completed)));
 
-        Log.e("intent_service", "service did a task");
+        Log.e("intent_service", getString(R.string.did_task));
     }
 }

@@ -54,11 +54,11 @@ public class MainActivity extends AppCompatActivity {
             else if (downloadProgress.getStatus() == DownloadProgress.STATUS_FINISHED) {
                 downloadedB.setText(String.format(Locale.getDefault(), "%d", downloadedBytes));
                 progressBar.setProgress(totalSize);
-                Toast.makeText(getApplicationContext(), "Download completed!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.download_completed, Toast.LENGTH_SHORT).show();
                 downloadedB.setText(String.format(Locale.getDefault(), "%s", "completed"));
             }
             else {
-                Toast.makeText(getApplicationContext(), "Error!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.error, Toast.LENGTH_SHORT).show();
             }
         }
     };
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                 taskGetInfo.execute(urlAddress.getText().toString());
             }
             else {
-                Toast.makeText(getApplicationContext(), "Incorrect URL address!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.incorrect_url_address, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
                     // User refused permission previously
                     if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                             Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                        Log.e("download_permission", "There is no permission to download file");
+                        Log.e("download_permission", getString(R.string.no_permission_message));
                     }
 
                     // Ask for permissions
@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             else {
-                Toast.makeText(getApplicationContext(), "Incorrect URL address!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.incorrect_url_address, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -143,12 +143,12 @@ public class MainActivity extends AppCompatActivity {
             }
             // There is no permission
             else {
-                Toast.makeText(getApplicationContext(), "You cannot download file without permission!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.no_permission_message_2, Toast.LENGTH_SHORT).show();
             }
         }
         // Unknown requestCode
         else {
-            Log.e("intent_service", "Unknown requestCode");
+            Log.e("intent_service", getString(R.string.unknown_reguest_code));
         }
     }
 
