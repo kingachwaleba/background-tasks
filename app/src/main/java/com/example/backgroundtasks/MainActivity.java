@@ -130,6 +130,34 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), R.string.incorrect_url_address, Toast.LENGTH_SHORT).show();
             }
         });
+
+        if (savedInstanceState != null) {
+            String savedUrlAddress = savedInstanceState.getString("url address");
+            String savedFileSize = savedInstanceState.getString("file size");
+            String savedFileType = savedInstanceState.getString("file type");
+            String savedDownloadedB = savedInstanceState.getString("downloaded B");
+
+            urlAddress.setText(savedUrlAddress);
+            fileSize.setText(savedFileSize);
+            fileType.setText(savedFileType);
+            downloadedB.setText(savedDownloadedB);
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        urlAddress = findViewById(R.id.inputURLaddress);
+        fileSize = findViewById(R.id.fileSizeValue);
+        fileType = findViewById(R.id.fileTypeValue);
+        downloadedB = findViewById(R.id.downloadedBvalue);
+        progressBar = findViewById(R.id.progressBar);
+
+        outState.putString("url address", urlAddress.getText().toString());
+        outState.putString("file size", fileSize.getText().toString());
+        outState.putString("file type", fileType.getText().toString());
+        outState.putString("downloaded B", downloadedB.getText().toString());
     }
 
     @Override
