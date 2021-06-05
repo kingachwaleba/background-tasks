@@ -103,17 +103,21 @@ public class MainActivity extends AppCompatActivity {
         });
 
         downloadFileButton.setOnClickListener(v -> {
+            // There is permission so download can start
             if (ActivityCompat.checkSelfPermission(
                     this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     == PackageManager.PERMISSION_GRANTED) {
                 MyIntentService.runService(MainActivity.this, urlAddress.getText().toString());
             }
+            // There is no permission
             else {
+                // User refused permission previously
 //                if (ActivityCompat.shouldShowRequestPermissionRationale(this,
 //                        Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
 //
 //                }
 
+                // Ask for permissions
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_EXTERNAL_STORAGE_CODE);
             }
@@ -126,13 +130,16 @@ public class MainActivity extends AppCompatActivity {
 
         switch (requestCode) {
             case WRITE_EXTERNAL_STORAGE_CODE:
+                // There is permission so download can start
                 if (permissions.length > 0 && permissions[0].equals(Manifest.permission.WRITE_EXTERNAL_STORAGE) && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     MyIntentService.runService(MainActivity.this, urlAddress.getText().toString());
                 }
+                // There is no permission
 //                else {
 //
 //                }
                 break;
+                // Unknown requestCode
 //            default:
 //
 //                break;
