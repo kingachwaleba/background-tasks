@@ -112,10 +112,10 @@ public class MainActivity extends AppCompatActivity {
             // There is no permission
             else {
                 // User refused permission previously
-//                if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-//                        Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-//
-//                }
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                    Toast.makeText(getApplicationContext(), "Permissions allows you to download file!", Toast.LENGTH_SHORT).show();
+                }
 
                 // Ask for permissions
                 ActivityCompat.requestPermissions(this,
