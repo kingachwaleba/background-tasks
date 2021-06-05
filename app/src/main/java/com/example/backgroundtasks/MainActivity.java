@@ -96,28 +96,38 @@ public class MainActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
 
         getInfoButton.setOnClickListener(v -> {
-            TaskGetInfo taskGetInfo = new TaskGetInfo();
-            taskGetInfo.execute(urlAddress.getText().toString());
+            if (checkUrlAddressField(urlAddress)) {
+                TaskGetInfo taskGetInfo = new TaskGetInfo();
+                taskGetInfo.execute(urlAddress.getText().toString());
+            }
+            else {
+                Toast.makeText(getApplicationContext(), "Incorrect URL address!", Toast.LENGTH_SHORT).show();
+            }
         });
 
         downloadFileButton.setOnClickListener(v -> {
-            // There is permission so download can start
-            if (ActivityCompat.checkSelfPermission(
-                    this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    == PackageManager.PERMISSION_GRANTED) {
-                MyIntentService.runService(MainActivity.this, urlAddress.getText().toString());
-            }
-            // There is no permission
-            else {
-                // User refused permission previously
-                if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                    Log.e("download_permission", "There is no permission to download file");
+            if (checkUrlAddressField(urlAddress)) {
+                // There is permission so download can start
+                if (ActivityCompat.checkSelfPermission(
+                        this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        == PackageManager.PERMISSION_GRANTED) {
+                    MyIntentService.runService(MainActivity.this, urlAddress.getText().toString());
                 }
+                // There is no permission
+                else {
+                    // User refused permission previously
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                        Log.e("download_permission", "There is no permission to download file");
+                    }
 
-                // Ask for permissions
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_EXTERNAL_STORAGE_CODE);
+                    // Ask for permissions
+                    ActivityCompat.requestPermissions(this,
+                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_EXTERNAL_STORAGE_CODE);
+                }
+            }
+            else {
+                Toast.makeText(getApplicationContext(), "Incorrect URL address!", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -140,6 +150,18 @@ public class MainActivity extends AppCompatActivity {
         else {
             Log.e("intent_service", "Unknown requestCode");
         }
+    }
+
+    public boolean checkUrlAddressField(EditText editText) {
+        return !isEmpty(editText) && startWithHttps(editText);
+    }
+
+    public boolean isEmpty(EditText editText) {
+        return editText.getText().toString().trim().length() == 0;
+    }
+
+    public boolean startWithHttps(EditText editText) {
+        return editText.getText().toString().startsWith("https://");
     }
 
     public class TaskGetInfo extends AsyncTask<String, Void, FileInfo> {
