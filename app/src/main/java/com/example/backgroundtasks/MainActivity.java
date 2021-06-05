@@ -135,9 +135,9 @@ public class MainActivity extends AppCompatActivity {
                     MyIntentService.runService(MainActivity.this, urlAddress.getText().toString());
                 }
                 // There is no permission
-//                else {
-//
-//                }
+                else {
+                    Toast.makeText(getApplicationContext(), "You cannot download file without permission!", Toast.LENGTH_SHORT).show();
+                }
                 break;
                 // Unknown requestCode
 //            default:
